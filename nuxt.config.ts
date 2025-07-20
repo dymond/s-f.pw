@@ -69,6 +69,9 @@ export default defineNuxtConfig({
       openAPI: true,
     },
     timing: true,
+    prerender: {
+      failOnError: false,
+    },
     openAPI: {
       production: 'runtime',
       meta: {

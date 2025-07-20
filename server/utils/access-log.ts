@@ -93,6 +93,12 @@ export function doubles2logs(doubles: number[]) {
 }
 
 export function useAccessLog(event: H3Event) {
+  // Skip access logging during prerendering when Cloudflare context is not available
+  if (!event.context.cloudflare?.request?.cf) {
+    console.log('Skipping access log - no Cloudflare context (likely prerendering)')
+    return Promise.resolve()
+  }
+
   const ip = getHeader(event, 'cf-connecting-ip') || getHeader(event, 'x-real-ip') || getRequestIP(event, { xForwardedFor: true })
 
   const { host: referer } = parseURL(getHeader(event, 'referer'))

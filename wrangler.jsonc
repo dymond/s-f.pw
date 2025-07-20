@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "s-fpw",
+	"name": "s-fhelp",
 	"main": "dist/server/index.mjs",
 	"assets": {
 		"binding": "ASSETS",
@@ -33,7 +33,11 @@
 	],
 	"observability": {
 		"enabled": true
-	}
+	},
+	"routes": [
+		"s-f.help/*",
+		"www.s-f.help/*"
+	]
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement

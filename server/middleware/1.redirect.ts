@@ -11,7 +11,7 @@ export default eventHandler(async (event) => {
   if (event.path === '/' && homeURL)
     return sendRedirect(event, homeURL)
 
-  if (slug && !reserveSlug.includes(slug) && slugRegex.test(slug) && cloudflare) {
+  if (slug && !reserveSlug.includes(slug) && slugRegex.test(slug) && cloudflare?.env?.KV) {
     const { KV } = cloudflare.env
 
     let link: z.infer<typeof LinkSchema> | null = null
