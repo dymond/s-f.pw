@@ -20,13 +20,13 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    siteToken: 'SinkCool',
+    siteToken: 'SFHelp',
     redirectStatusCode: '301',
     linkCacheTtl: 60,
     redirectWithQuery: false,
-    homeURL: '',
-    cfAccountId: '',
-    cfApiToken: '',
+    homeURL: 'https://s-f.help',
+    cfAccountId: '266371314ae112f9f548104104619ae6',
+    cfApiToken: 'I1esRaw6b2qwmx7u0jup-Q8HB9lhqlDcc8h_Rmh_',
     dataset: 'sink',
     aiModel: '@cf/meta/llama-3.1-8b-instruct',
     aiPrompt: `You are a URL shortening assistant, please shorten the URL provided by the user into a SLUG. The SLUG information must come from the URL itself, do not make any assumptions. A SLUG is human-readable and should not exceed three words and can be validated using regular expressions {slugRegex} . Only the best one is returned, the format must be JSON reference {"slug": "example-slug"}`,
@@ -34,7 +34,7 @@ export default defineNuxtConfig({
     listQueryLimit: 500,
     disableBotAccessLog: false,
     public: {
-      previewMode: '',
+      previewMode: 'false',
       slugDefaultLength: '6',
     },
   },
@@ -69,10 +69,43 @@ export default defineNuxtConfig({
       openAPI: true,
     },
     timing: true,
+    rollupConfig: {
+      onwarn(warning, warn) {
+        // Suppress specific warnings about 'this' keyword in ES modules
+        if (warning.code === 'THIS_IS_UNDEFINED') {
+          return
+        }
+        // Suppress circular dependency warnings
+        if (warning.code === 'CIRCULAR_DEPENDENCY') {
+          return
+        }
+        warn(warning)
+      },
+      output: {
+        manualChunks(id) {
+          // Split visualization libraries into separate chunk
+          if (id.includes('globe.gl') || id.includes('three') || id.includes('d3-scale')) {
+            return 'globe-viz'
+          }
+          // Split UI component libraries
+          if (id.includes('radix-vue') || id.includes('@vueuse/')) {
+            return 'ui-components'
+          }
+          // Split icons
+          if (id.includes('vue3-simple-icons') || id.includes('lucide-vue-next')) {
+            return 'icons'
+          }
+          // Split form libraries (avoid external modules)
+          if (id.includes('node_modules') && (id.includes('zod') || id.includes('@internationalized'))) {
+            return 'forms'
+          }
+        },
+      },
+    },
     openAPI: {
       production: 'runtime',
       meta: {
-        title: 'Sink API',
+        title: 'SFHelp API',
         description: 'A Simple / Speedy / Secure Link Shortener with Analytics, 100% run on Cloudflare.',
       },
       route: '/_docs/openapi.json',
@@ -114,7 +147,7 @@ export default defineNuxtConfig({
     strategy: 'no_prefix',
     detectBrowserLanguage: {
       useCookie: true,
-      cookieKey: 'sink_i18n_redirected',
+      cookieKey: 'sfhelp_i18n_redirected',
       redirectOn: 'root',
     },
     baseUrl: '/',

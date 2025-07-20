@@ -2,9 +2,7 @@
 import { useElementSize } from '@vueuse/core'
 import { scaleSequentialSqrt } from 'd3-scale'
 import { interpolateYlOrRd } from 'd3-scale-chromatic'
-import Globe from 'globe.gl'
 import { debounce } from 'lodash-es'
-import { MeshPhongMaterial } from 'three'
 
 const props = defineProps({
   minutes: {
@@ -109,7 +107,14 @@ function trafficEvent({ props }, { delay = 0 }) {
 
 const normalized = 5 / props.minutes
 const weightColor = scaleSequentialSqrt(interpolateYlOrRd).domain([0, highest.value * normalized * 15])
-function initGlobe() {
+
+async function initGlobe() {
+  // Dynamically import Globe.gl and Three.js only when needed
+  const [{ default: Globe }, { MeshPhongMaterial }] = await Promise.all([
+    import('globe.gl'),
+    import('three'),
+  ])
+
   globe = new Globe(globeEl.value)
     .width(size.value.width)
     .height(size.value.height)

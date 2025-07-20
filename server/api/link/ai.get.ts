@@ -20,7 +20,7 @@ export default eventHandler(async (event) => {
       { role: 'user', content: 'https://github.com/nuxt-hub/' },
       { role: 'assistant', content: '{"slug": "nuxt-hub"}' },
 
-      { role: 'user', content: 'https://sink.cool/' },
+      { role: 'user', content: 'https://s-f.help/' },
       { role: 'assistant', content: '{"slug": "sink-cool"}' },
 
       { role: 'user', content: 'https://github.com/ccbikai/sink' },

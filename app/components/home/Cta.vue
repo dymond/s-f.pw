@@ -6,16 +6,23 @@
       {{ $t('home.cta.title') }}
     </h2>
     <p class="mt-4 text-lg text-slate-400 md:text-xl">
-      {{ $t('home.cta.description') }}
+      With just a few simple clicks, you can create your own short version of a link that looks like this:
     </p>
-    <div class="flex mt-5">
-      <HomeLink
-        href="https://github.com/ccbikai/sink?tab=readme-ov-file#%EF%B8%8F-deployment"
-        type="inverted"
-        :title="$t('home.cta.button')"
-      >
-        {{ $t('home.cta.button') }}
-      </HomeLink>
+    <a href="/SalarySchedule" class="block p-2 bg-grey-500 border border-grey-300 text-[2.5vw] sm:text-base mt-4"><pre>https://s-f.help/SalarySchedule</pre></a>
+    <p class="mt-4 text-lg text-slate-400 md:text-xl">
+      instead of this:
+    </p>
+    <pre class="block p-2 bg-grey-500 border border-grey-300 text-[2.5vw] sm:text-base mt-4">https://www.sfcollege.edu/hr/assets/Salary%20Schedule.pdf</pre>
+    <div class="mt-4">
+      <div class="flex">
+        <HomeLink
+          href="/dashboard"
+          type="inverted"
+          :title="$t('home.cta.button')"
+        >
+          {{ $t('home.cta.button') }}
+        </HomeLink>
+      </div>
     </div>
   </div>
 </template>

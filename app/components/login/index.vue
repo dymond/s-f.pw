@@ -55,7 +55,7 @@ async function onSubmit(form) {
           <AlertCircle class="w-4 h-4" />
           <AlertTitle>{{ $t('login.tips') }}</AlertTitle>
           <AlertDescription>
-            {{ $t('login.preview_token') }} <code class="font-mono text-green-500">SinkCool</code> .
+            {{ $t('login.preview_token') }} <code class="font-mono text-green-500">SFHelp</code> .
           </AlertDescription>
         </Alert>
         <Button class="w-full">
